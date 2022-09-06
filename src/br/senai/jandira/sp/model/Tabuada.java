@@ -12,7 +12,7 @@ public class Tabuada {
 	public int multiplicando;
 	public int minMultiplicador;
 	public int maxMultiplicador;
-	public ArrayList<String> conta = new ArrayList<String> ();
+	public ArrayList<String> tabuada = new ArrayList<String> ();
 	
 	// métodos 
 
@@ -23,11 +23,11 @@ public class Tabuada {
 
 	public ArrayList<String> getResultado ()  {
 		while (minMultiplicador <= maxMultiplicador) {
-			conta.add(multiplicando + "x" + minMultiplicador + "=" + getTabuada());
+			tabuada.add(multiplicando + "x" + minMultiplicador + "=" + getTabuada());
 			minMultiplicador++;
 		}
 
-		return conta;
+		return tabuada;
 
 	
 
