@@ -1,4 +1,6 @@
 package br.senai.jandira.sp.gui;
+import java.awt.event.ActionListener;
+import java.awt.event.TextListener;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -9,14 +11,20 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-public class FrameTabuada {
+import br.senai.jandira.sp.model.Tabuada;
+
+public class FrameTabuada{
 	
 	public String titulo;
 	public int largura;
@@ -92,6 +100,7 @@ public class FrameTabuada {
     textp1.setBounds(270, 130, 200, 26);
     textp1.setBorder(new LineBorder(Color.BLUE));
     
+    
     JLabel labelp2 = new JLabel();
     labelp2.setText("Mínimo Multiplicador:");
 	labelp2.setBounds(8, 100, 250, 200);
@@ -102,6 +111,7 @@ public class FrameTabuada {
     JTextField textp2 = new JTextField();
     textp2.setBounds(270, 190, 200, 26);
     textp2.setBorder(new LineBorder(Color.BLUE));
+   
     
     JLabel labelp3 = new JLabel();
     labelp3.setText("Máximo Multiplicador:");
@@ -126,6 +136,10 @@ public class FrameTabuada {
 	buttonCalcular.setForeground(Color.white);
 	buttonCalcular.setBorder(new LineBorder(Color.BLUE));
 	
+	
+
+	
+	
 	JButton buttonApagar = new JButton();
 	buttonApagar.setText("Apagar");
 	buttonApagar.setFont(new Font("Arial Black", Font.BOLD, 20));
@@ -135,6 +149,21 @@ public class FrameTabuada {
 	buttonApagar.setBackground(Color.yellow);
 	buttonApagar.setForeground(Color.white);
 	buttonApagar.setBorder(new LineBorder(Color.BLUE));
+	
+	JLabel labelp5 = new JLabel();
+    labelp5.setText("Resultado:");
+	labelp5.setBounds(8, 290, 200, 200);
+	labelp5.setFont(new Font("Arial", Font.BOLD, 26));
+    labelp5.setForeground(Color.BLACK);
+    labelp5.setEnabled(true);
+    
+    JButton buttonResultado = new JButton();
+	buttonResultado.setBounds(8, 420, 490, 218);
+	buttonResultado.setContentAreaFilled(false);
+	buttonResultado.setOpaque(true);
+	buttonResultado.setBackground(Color.yellow);
+	buttonResultado.setBorder(new LineBorder(Color.BLUE));
+	
 	
 	//Adicionando no painel 
 	
@@ -149,6 +178,8 @@ public class FrameTabuada {
 	painel.add(textp3);
 	painel.add(buttonCalcular);
 	painel.add(buttonApagar);
+	painel.add(labelp5);
+	painel.add(buttonResultado);
 	
 	
    // Deixando Visiveis 
@@ -159,14 +190,27 @@ public class FrameTabuada {
 	labelH1.setVisible(true);
 	
 	
-	
-	
-	
-	
-	
-	
+	buttonCalcular.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+			Tabuada tabuada3 = new Tabuada ();
+			tabuada3.multiplicando = Integer.parseInt(textp1.getText());
+			tabuada3.minMultiplicador = Integer.parseInt(textp2.getText());
+			tabuada3.maxMultiplicador = Integer.parseInt(textp3.getText());
+			
+			System.out.println(tabuada3.getResultado());
+			
+			
+		}
+	});
 	
 	}
+    
+	
+	
 
 
 	
