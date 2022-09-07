@@ -2,6 +2,9 @@ package br.senai.jandira.sp.gui;
 import java.awt.event.ActionListener;
 import java.awt.event.TextListener;
 
+import javax.swing.AbstractButton;
+import javax.swing.ButtonModel;
+import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,14 +20,18 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
 
 import br.senai.jandira.sp.model.Tabuada;
 
 public class FrameTabuada{
+	//DefaultListModel model = new DefaultListModel();
 	
 	public String titulo;
 	public int largura;
@@ -138,8 +145,6 @@ public class FrameTabuada{
 	
 	
 
-	
-	
 	JButton buttonApagar = new JButton();
 	buttonApagar.setText("Apagar");
 	buttonApagar.setFont(new Font("Arial Black", Font.BOLD, 20));
@@ -149,6 +154,7 @@ public class FrameTabuada{
 	buttonApagar.setBackground(Color.yellow);
 	buttonApagar.setForeground(Color.white);
 	buttonApagar.setBorder(new LineBorder(Color.BLUE));
+
 	
 	JLabel labelp5 = new JLabel();
     labelp5.setText("Resultado:");
@@ -156,14 +162,17 @@ public class FrameTabuada{
 	labelp5.setFont(new Font("Arial", Font.BOLD, 26));
     labelp5.setForeground(Color.BLACK);
     labelp5.setEnabled(true);
+
+   
+	JList jList = new JList();
+
     
-    JButton buttonResultado = new JButton();
-	buttonResultado.setBounds(8, 420, 490, 218);
-	buttonResultado.setContentAreaFilled(false);
-	buttonResultado.setOpaque(true);
-	buttonResultado.setBackground(Color.yellow);
-	buttonResultado.setBorder(new LineBorder(Color.BLUE));
-	
+    
+    JScrollPane jScrollPane = new JScrollPane();
+	jScrollPane.setViewportView(jList) ;
+	jScrollPane.setBounds(8, 420, 490, 218);
+   
+
 	
 	//Adicionando no painel 
 	
@@ -179,7 +188,7 @@ public class FrameTabuada{
 	painel.add(buttonCalcular);
 	painel.add(buttonApagar);
 	painel.add(labelp5);
-	painel.add(buttonResultado);
+	painel.add(jScrollPane);
 	
 	
    // Deixando Visiveis 
@@ -188,6 +197,10 @@ public class FrameTabuada{
 	tela.setVisible(true);
 	labelTitulo.setVisible(true);
 	labelH1.setVisible(true);
+	
+	//criando lista
+	
+	
 	
 	
 	buttonCalcular.addActionListener(new ActionListener() {
@@ -201,7 +214,36 @@ public class FrameTabuada{
 			tabuada3.minMultiplicador = Integer.parseInt(textp2.getText());
 			tabuada3.maxMultiplicador = Integer.parseInt(textp3.getText());
 			
-			System.out.println(tabuada3.getResultado());
+			//System.out.println(tabuada3.getResultado());
+			
+			DefaultListModel<String> listj = new DefaultListModel<String>();
+			for (String funcionar : tabuada3.getResultado()) {
+				listj.addElement(funcionar);
+			}
+			jList.setModel(listj);
+			jScrollPane.getViewport().add(jList);
+			
+			
+		
+			buttonApagar.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+					textp1.setText("");
+					textp2.setText("");
+					textp3.setText("");
+					jScrollPane.removeAll();
+					jScrollPane.repaint();
+					
+					
+					
+				}
+			});
+			
+			
+			
 			
 			
 		}
