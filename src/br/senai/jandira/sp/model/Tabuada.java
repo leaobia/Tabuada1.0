@@ -23,7 +23,7 @@ public class Tabuada {
 
 	public ArrayList<String> getResultado ()  {
 		while (minMultiplicador <= maxMultiplicador) {
-			tabuada.add(multiplicando + "x" + minMultiplicador + "=" + getTabuada());
+			tabuada.add(multiplicando + " x " + minMultiplicador + " = " + getTabuada());
 			minMultiplicador++;
 		}
 

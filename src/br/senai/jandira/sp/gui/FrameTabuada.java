@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
@@ -25,6 +26,15 @@ public class FrameTabuada{
 	public String titulo;
 	public int largura;
 	public int altura; 
+	
+	// Cores e borda
+	
+	Color amareloClaro = new Color(255, 255, 224); 
+	Color verdeFloresta = new Color (34,139,34);
+	Color amareloEscuro = new Color (255,215,0);
+	Color azulNovo= new Color (0,0,255);
+	LineBorder personalizada = new LineBorder(Color.blue, 2);
+	LineBorder personalizada2 = new LineBorder(Color.blue, 1);
 	
 	// Criação da tela 
 	
@@ -97,8 +107,10 @@ public class FrameTabuada{
     
     JTextField textp1 = new JTextField();
     textp1.setBounds(270, 130, 200, 26);
-    textp1.setBorder(new LineBorder(Color.BLUE));
-    
+    textp1.setBorder (personalizada);
+    textp1.setForeground(azulNovo);
+    textp1.setFont(new Font("Arial", Font.BOLD, 20));
+    textp1.setHorizontalAlignment(JTextField.RIGHT); 
     
     JLabel labelp2 = new JLabel();
     labelp2.setText("Mínimo Multiplicador:");
@@ -109,8 +121,10 @@ public class FrameTabuada{
     
     JTextField textp2 = new JTextField();
     textp2.setBounds(270, 190, 200, 26);
-    textp2.setBorder(new LineBorder(Color.BLUE));
-   
+    textp2.setBorder(personalizada);
+    textp2.setForeground(azulNovo);
+    textp2.setFont(new Font("Arial", Font.BOLD, 20));
+    textp2.setHorizontalAlignment(JTextField.RIGHT); 
     
     JLabel labelp3 = new JLabel();
     labelp3.setText("Máximo Multiplicador:");
@@ -121,9 +135,10 @@ public class FrameTabuada{
     
     JTextField textp3 = new JTextField();
     textp3.setBounds(270, 250, 200, 26);
-    textp3.setBorder(new LineBorder(Color.BLUE));
-    
-
+    textp3.setBorder(personalizada);
+    textp3.setForeground(azulNovo);
+    textp3.setFont(new Font("Arial", Font.BOLD, 20));
+    textp3.setHorizontalAlignment(JTextField.RIGHT);
     
     JButton buttonCalcular = new JButton();
 	buttonCalcular.setText("Calcular");
@@ -131,9 +146,9 @@ public class FrameTabuada{
 	buttonCalcular.setBounds(8, 300, 255, 50);
 	buttonCalcular.setContentAreaFilled(false);
 	buttonCalcular.setOpaque(true);
-	buttonCalcular.setBackground(Color.green);
+	buttonCalcular.setBackground(verdeFloresta);
 	buttonCalcular.setForeground(Color.white);
-	buttonCalcular.setBorder(new LineBorder(Color.BLUE));
+	buttonCalcular.setBorder(personalizada);
 	
 	
 
@@ -143,9 +158,10 @@ public class FrameTabuada{
 	buttonApagar.setBounds(270, 300, 200, 50);
 	buttonApagar.setContentAreaFilled(false);
 	buttonApagar.setOpaque(true);
-	buttonApagar.setBackground(Color.yellow);
+	buttonApagar.setBackground(amareloEscuro);
 	buttonApagar.setForeground(Color.white);
-	buttonApagar.setBorder(new LineBorder(Color.BLUE));
+	buttonApagar.setBorder(personalizada);
+
 
 	
 	JLabel labelp5 = new JLabel();
@@ -155,14 +171,16 @@ public class FrameTabuada{
     labelp5.setForeground(Color.BLACK);
     labelp5.setEnabled(true);
 
-   
-	JList jList = new JList();
-	
-	// Apagando JList
-	
-	
 
-    
+	
+	JList jList = new JList();
+	jList.setBackground(amareloClaro);
+	jList.setBorder(personalizada2);
+	jList.setFont(new Font("Arial", Font.BOLD, 23));
+	jList.setForeground(verdeFloresta);
+	
+	
+	
     
     JScrollPane jScrollPane = new JScrollPane();
 	jScrollPane.setViewportView(jList) ;
@@ -202,10 +220,13 @@ public class FrameTabuada{
 	
 	
 	
+	
 	buttonCalcular.addActionListener(new ActionListener() {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			
+			if (Integer.parseInt(textp2.getText()) <= Integer.parseInt(textp3.getText())) {
 			// TODO Auto-generated method stub
 			
 			Tabuada tabuada3 = new Tabuada ();
@@ -215,23 +236,34 @@ public class FrameTabuada{
 			
 			//System.out.println(tabuada3.getResultado());
 			
+	  
+			
 			DefaultListModel<String> listj = new DefaultListModel<String>();
 			for (String funcionar : tabuada3.getResultado()) {
 				listj.addElement(funcionar);
 			}
 			jList.setModel(listj);
-			jScrollPane.getViewport().add(jList);
+			jScrollPane.getViewport().add(jList); 
+		
+		} else {
+		
+			JOptionPane.showMessageDialog(jScrollPane,
+				    "Um mínimo multiplicando não pode ser maior do que um máximo multiplicando",
+			    "Erro.",
+				    JOptionPane.ERROR_MESSAGE); }
+		 
+			
 			
 			
 		
 			buttonApagar.addActionListener(new ActionListener() {
 				
-				@Override
+				
+			@Override
 				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					DefaultListModel<String> listj = new DefaultListModel<String>();
-					for (String funcionar : tabuada3.getResultado()) {
-						listj.addElement(funcionar);
+				// TODO Auto-generated method stub
+					DefaultListModel<String> listj = new DefaultListModel<String>();{
+					
 					}
 					jList.setModel(listj);
 					((DefaultListModel)(jList.getModel())).clear();
@@ -243,7 +275,7 @@ public class FrameTabuada{
 					
 					
 					
-				}
+			}
 			});
 			
 			
