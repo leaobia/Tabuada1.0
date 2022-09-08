@@ -1,31 +1,20 @@
 package br.senai.jandira.sp.gui;
-import java.awt.event.ActionListener;
-import java.awt.event.TextListener;
-
-import javax.swing.AbstractButton;
-import javax.swing.ButtonModel;
-import javax.swing.DefaultListModel;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.ListModel;
-import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
 
 import br.senai.jandira.sp.model.Tabuada;
@@ -59,15 +48,18 @@ public class FrameTabuada{
 	
 	Container painel = tela.getContentPane();	
 	
+	
+	// Criação imagem 
+	
+	ImageIcon logo = new ImageIcon("Tabuada1.0/src/br/senai/jandira/sp/imagens/menino.PNG");
+	JLabel labelImagem = new JLabel();
+	labelImagem.setIcon(logo);
+	labelImagem.setBounds(10,5,100,100);
+	
 	// Criação dos componentes da tela
-	
-	
-	
-	
 	
 	JLabel labelTitulo = new JLabel();
 	labelTitulo.setText("Tabuada");
-	BufferedImage icon = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
 	JLabel labelH1 = new JLabel();
 	labelH1.setText("Tabuada 1.0");
 	labelH1.setBounds(85, -73, 200, 200);
@@ -165,6 +157,10 @@ public class FrameTabuada{
 
    
 	JList jList = new JList();
+	
+	// Apagando JList
+	
+	
 
     
     
@@ -189,6 +185,8 @@ public class FrameTabuada{
 	painel.add(buttonApagar);
 	painel.add(labelp5);
 	painel.add(jScrollPane);
+	painel.add(labelImagem);
+
 	
 	
    // Deixando Visiveis 
@@ -197,6 +195,7 @@ public class FrameTabuada{
 	tela.setVisible(true);
 	labelTitulo.setVisible(true);
 	labelH1.setVisible(true);
+	labelImagem.setVisible(true);
 	
 	//criando lista
 	
@@ -230,12 +229,17 @@ public class FrameTabuada{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					
+					DefaultListModel<String> listj = new DefaultListModel<String>();
+					for (String funcionar : tabuada3.getResultado()) {
+						listj.addElement(funcionar);
+					}
+					jList.setModel(listj);
+					((DefaultListModel)(jList.getModel())).clear();
 					textp1.setText("");
 					textp2.setText("");
 					textp3.setText("");
-					jScrollPane.removeAll();
-					jScrollPane.repaint();
+		
+					
 					
 					
 					
