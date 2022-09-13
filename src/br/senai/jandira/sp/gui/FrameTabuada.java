@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.net.URL;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -59,11 +60,12 @@ public class FrameTabuada {
 		Container painel = tela.getContentPane();
 
 		// Criação imagem
-
-		ImageIcon logo = new ImageIcon("Tabuada1.0/src/br/senai/jandira/sp/imagens/menino.PNG");
-		JLabel labelImagem = new JLabel();
+		
+        URL url = getClass().getResource("/br/senai/jandira/sp/imagens/menino.PNG");
+		ImageIcon logo = new ImageIcon(url);
+		JLabel labelImagem = new JLabel(logo);
 		labelImagem.setIcon(logo);
-		labelImagem.setBounds(10, 5, 100, 100);
+		labelImagem.setBounds(0, 5, 100, 100);
 
 		// Criação dos componentes da tela
 
@@ -185,6 +187,7 @@ public class FrameTabuada {
 		painel.add(labelp5);
 		painel.add(jScrollPane);
 		painel.add(labelImagem);
+		
 
 		// Deixando Visiveis
 
