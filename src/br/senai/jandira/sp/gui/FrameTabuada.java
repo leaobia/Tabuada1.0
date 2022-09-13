@@ -204,8 +204,17 @@ public class FrameTabuada {
 			@Override
 
 			public void actionPerformed(ActionEvent e) {
+			 if (textMultiplicando.getText().matches("[A-Za-z-]+")) {
+				JOptionPane.showMessageDialog(jScrollPane, "O multiplicando deve ser um número inteiro!", "Erro.",
+						JOptionPane.ERROR_MESSAGE);
+			} else if (textMinimoMultiplicador.getText().matches("[A-Za-z-]+")) {
+				JOptionPane.showMessageDialog(jScrollPane, "O mínimo multiplicando deve ser um número inteiro", "Erro.",
+						JOptionPane.ERROR_MESSAGE);
+			} else if (textMaximoMultiplicador.getText().matches("[A-Za-z-]+")) {
+				JOptionPane.showMessageDialog(jScrollPane, "O máximo multiplicando deve ser um número inteiro!", "Erro.",
+						JOptionPane.ERROR_MESSAGE);
 
-				if (textMultiplicando.getText().equals("")) {
+			} else if (textMultiplicando.getText().equals("")) {
 					JOptionPane.showMessageDialog(jScrollPane, "Insira multiplicando!", "Erro.",
 							JOptionPane.ERROR_MESSAGE);
 					textMultiplicando.requestFocus();
