@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 
@@ -133,6 +135,7 @@ public class FrameTabuada {
 		textMaximoMultiplicador.setForeground(azulNovo);
 		textMaximoMultiplicador.setFont(new Font("Arial", Font.BOLD, 20));
 		textMaximoMultiplicador.setHorizontalAlignment(JTextField.RIGHT);
+		
 
 		JButton buttonCalcular = new JButton();
 		buttonCalcular.setText("Calcular");
@@ -198,43 +201,47 @@ public class FrameTabuada {
 		labelImagem.setVisible(true);
 
 		// criando lista
+		
+		textMaximoMultiplicador.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+				textMaximoMultiplicador.setText(textMaximoMultiplicador.getText().replaceAll("^0-9", ""));
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
+		
 		buttonCalcular.addActionListener(new ActionListener() {
 
 			@Override
 
 			public void actionPerformed(ActionEvent e) {
-			 if (textMultiplicando.getText().matches("[A-Za-z-]+")) {
-				JOptionPane.showMessageDialog(jScrollPane, "O multiplicando deve ser um número inteiro!", "Erro.",
-						JOptionPane.ERROR_MESSAGE);
-			} else if (textMinimoMultiplicador.getText().matches("[A-Za-z-]+")) {
+				 if (textMultiplicando.getText().replaceAll("[^0-9]", "") != null) {
+						JOptionPane.showMessageDialog(jScrollPane, "O multiplicando deve ser um número inteiro", "Erro.",
+								JOptionPane.ERROR_MESSAGE);
+			} else if (textMinimoMultiplicador.getText().replaceAll("[^0-9]", "") != null) {
 				JOptionPane.showMessageDialog(jScrollPane, "O mínimo multiplicando deve ser um número inteiro", "Erro.",
 						JOptionPane.ERROR_MESSAGE);
-			} else if (textMaximoMultiplicador.getText().matches("[A-Za-z-]+")) {
+			} else if (textMaximoMultiplicador.getText().replaceAll("[^0-9]", "") != null) {
 				JOptionPane.showMessageDialog(jScrollPane, "O máximo multiplicando deve ser um número inteiro!", "Erro.",
 						JOptionPane.ERROR_MESSAGE);
-
-			} else if (textMultiplicando.getText().equals("")) {
-					JOptionPane.showMessageDialog(jScrollPane, "Insira multiplicando!", "Erro.",
-							JOptionPane.ERROR_MESSAGE);
-					textMultiplicando.requestFocus();
-				} else if (textMinimoMultiplicador.getText().equals("")) {
-					JOptionPane.showMessageDialog(jScrollPane, "Insira mínimo multiplicador!", "Erro.",
-							JOptionPane.ERROR_MESSAGE);
-					textMinimoMultiplicador.requestFocus();
-				} else if (textMaximoMultiplicador.getText().equals("")) {
-					JOptionPane.showMessageDialog(jScrollPane, "Insira máximo multiplicador!", "Erro.",
-							JOptionPane.ERROR_MESSAGE);
-					textMaximoMultiplicador.requestFocus();
-				} else if (textMultiplicando.getText().matches("[A-Za-z-]+")) {
-					JOptionPane.showMessageDialog(jScrollPane, "O multiplicando deve ser um número inteiro!", "Erro.",
-							JOptionPane.ERROR_MESSAGE);
-				} else if (textMinimoMultiplicador.getText().matches("[A-Za-z-]+")) {
-					JOptionPane.showMessageDialog(jScrollPane, "O mínimo multiplicando deve ser um número inteiro", "Erro.",
-							JOptionPane.ERROR_MESSAGE);
-				} else if (textMaximoMultiplicador.getText().matches("[A-Za-z-]+")) {
-					JOptionPane.showMessageDialog(jScrollPane, "O máximo multiplicando deve ser um número inteiro!", "Erro.",
-							JOptionPane.ERROR_MESSAGE);
+			 
+			
 				} else if (Integer.parseInt(textMinimoMultiplicador.getText()) <= Integer
 						.parseInt(textMaximoMultiplicador.getText())) {
 					// TODO Auto-generated method stub
